@@ -1,5 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 
+/**
+ * Returns a Material UI theme object based on the selected mode (light/dark).
+ * @param mode 'light' | 'dark'
+ * @returns {Theme}
+ */
 const getTheme = ({ mode }: { mode: 'light' | 'dark' }) =>
   createTheme({
     palette: {

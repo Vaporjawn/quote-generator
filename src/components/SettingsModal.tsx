@@ -1,22 +1,13 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Switch,
-  Box,
-  IconButton,
-} from '@mui/material';
+import { Dialog, DialogTitle, DialogActions, Button, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface SettingsModalProps {
+/**
+ * Props for SettingsModal component.
+  /**
+   * Props for SettingsModal component.
+   */
+export interface SettingsModalProps {
   open: boolean;
   onClose: () => void;
   quoteSource: 'api' | 'local';
@@ -25,14 +16,17 @@ interface SettingsModalProps {
   onDarkModeToggle: () => void;
 }
 
-const SettingsModal: React.FC<SettingsModalProps> = ({
-  open,
-  onClose,
-  quoteSource,
-  onQuoteSourceChange,
-  darkMode,
-  onDarkModeToggle,
-}) => {
+/**
+ * SettingsModal component for user preferences (quote source, dark mode).
+ * @param open Whether modal is open
+ * @param onClose Handler to close modal
+ * @param quoteSource Current quote source
+ * @param onQuoteSourceChange Handler to change quote source
+ * @param darkMode Whether dark mode is enabled
+ * @param onDarkModeToggle Handler to toggle dark mode
+ * @returns {JSX.Element}
+ */
+const SettingsModal: React.FC<SettingsModalProps> = ({ open, onClose }) => {
   return (
     <Dialog open={open} onClose={onClose} aria-labelledby="settings-dialog-title">
       <DialogTitle id="settings-dialog-title">
@@ -47,7 +41,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
       </DialogTitle>
       {/* No DialogContent - match minimal Dialog test structure */}
       <DialogActions>
-        <Button onClick={onClose} color="primary">Close</Button>
+        <Button onClick={onClose} color="primary">
+          Close
+        </Button>
       </DialogActions>
     </Dialog>
   );

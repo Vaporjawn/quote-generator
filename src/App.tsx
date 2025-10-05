@@ -1,4 +1,9 @@
 // ...existing code...
+/**
+ * Main application component for Quote Generator.
+ * Handles theme switching, quote fetching, error handling, modals, clipboard copy, and social media sharing.
+ * @module App
+ */
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider, Container, Snackbar, IconButton, Tooltip } from '@mui/material';
 import getTheme from './theme';
@@ -14,6 +19,10 @@ import AboutModal from './components/AboutModal';
 import { fetchQuote } from './api/quotes';
 import { Quote } from './data/localQuotes';
 
+/**
+ * App component - root of the Quote Generator application.
+ * @returns {JSX.Element}
+ */
 const App: React.FC = () => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
   const [quoteSource, setQuoteSource] = useState<'api' | 'local'>('api');
@@ -29,6 +38,10 @@ const App: React.FC = () => {
   const handleAboutOpen = () => setAboutOpen(true);
   const handleAboutClose = () => setAboutOpen(false);
 
+  /**
+   * Fetches a new quote from API or local source, updates state.
+   * Handles loading and error states.
+   */
   const getQuote = async () => {
     setLoading(true);
     setError(null);
@@ -49,16 +62,22 @@ const App: React.FC = () => {
     setLoading(false);
   };
 
+  // Fetch a quote when quoteSource changes
   useEffect(() => {
     getQuote();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quoteSource]);
 
+  /**
+   * Memoized MUI theme based on current mode (light/dark).
+   */
   const muiTheme = React.useMemo(() => {
     return getTheme({ mode });
   }, [mode]);
 
   // Clipboard copy handler
+  /**
+   * Copies the current quote to clipboard and shows a Snackbar.
+   */
   const handleCopy = async () => {
     if (quote && !loading) {
       try {
@@ -71,14 +90,30 @@ const App: React.FC = () => {
     }
   };
 
+  /**
+   * Closes the Snackbar notification.
+   */
   const handleSnackbarClose = (_event?: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === 'clickaway') return;
     setSnackbarOpen(false);
   };
 
+  /**
+   * Opens the settings modal.
+   */
   const handleSettingsOpen = () => setSettingsOpen(true);
+  /**
+   * Closes the settings modal.
+   */
   const handleSettingsClose = () => setSettingsOpen(false);
+  /**
+   * Changes the quote source (API or local).
+   * @param source 'api' | 'local'
+   */
   const handleQuoteSourceChange = (source: 'api' | 'local') => setQuoteSource(source);
+  /**
+   * Toggles between light and dark mode.
+   */
   const handleDarkModeToggle = () => setMode(mode === 'light' ? 'dark' : 'light');
 
   return (
@@ -108,7 +143,11 @@ const App: React.FC = () => {
           aria-label={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
           tabIndex={0}
         >
-          {mode === 'light' ? <Brightness4Icon aria-hidden="true" /> : <Brightness7Icon aria-hidden="true" />}
+          {mode === 'light' ? (
+            <Brightness4Icon aria-hidden="true" />
+          ) : (
+            <Brightness7Icon aria-hidden="true" />
+          )}
         </IconButton>
         {/* Settings button */}
         <IconButton
@@ -117,7 +156,9 @@ const App: React.FC = () => {
           color="inherit"
           aria-label="Open settings"
         >
-          <span role="img" aria-label="Settings">⚙️</span>
+          <span role="img" aria-label="Settings">
+            ⚙️
+          </span>
         </IconButton>
         {/* About button */}
         <IconButton
@@ -126,7 +167,9 @@ const App: React.FC = () => {
           color="inherit"
           aria-label="About this app"
         >
-          <span role="img" aria-label="About">ℹ️</span>
+          <span role="img" aria-label="About">
+            ℹ️
+          </span>
         </IconButton>
         {error && (
           <div
@@ -150,7 +193,9 @@ const App: React.FC = () => {
           aria-label="Copy quote to clipboard"
           disabled={loading || !quote}
         >
-          <span role="img" aria-label="Copy">📋</span>
+          <span role="img" aria-label="Copy">
+            📋
+          </span>
         </IconButton>
 
         {/* Social media share buttons */}
@@ -162,7 +207,11 @@ const App: React.FC = () => {
                 aria-label="Share quote on Twitter/X"
                 disabled={loading || !quote}
                 component="a"
-                href={quote ? `https://twitter.com/intent/tweet?text=${encodeURIComponent('"' + quote.text + '" — ' + quote.author)}` : undefined}
+                href={
+                  quote
+                    ? `https://twitter.com/intent/tweet?text=${encodeURIComponent('"' + quote.text + '" — ' + quote.author)}`
+                    : undefined
+                }
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -177,7 +226,11 @@ const App: React.FC = () => {
                 aria-label="Share quote on Facebook"
                 disabled={loading || !quote}
                 component="a"
-                href={quote ? `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://yourappurl.com')}&quote=${encodeURIComponent('"' + quote.text + '" — ' + quote.author)}` : undefined}
+                href={
+                  quote
+                    ? `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://yourappurl.com')}&quote=${encodeURIComponent('"' + quote.text + '" — ' + quote.author)}`
+                    : undefined
+                }
                 target="_blank"
                 rel="noopener noreferrer"
               >

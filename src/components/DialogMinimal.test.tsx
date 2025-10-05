@@ -7,7 +7,7 @@ describe('Dialog minimal', () => {
     render(
       <Dialog open={true} onClose={() => {}} aria-labelledby="minimal-dialog-title">
         <div>Minimal Dialog Content</div>
-      </Dialog>
+      </Dialog>,
     );
     expect(screen.getByRole('dialog')).toBeInTheDocument();
     expect(screen.getByText(/Minimal Dialog Content/i)).toBeInTheDocument();

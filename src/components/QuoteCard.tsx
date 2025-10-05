@@ -1,13 +1,21 @@
-
 import React from 'react';
 import { Card, CardContent, Typography, Skeleton } from '@mui/material';
 import { Quote } from '../data/localQuotes';
 
+/**
+ * Props for QuoteCard component.
+ */
 interface QuoteCardProps {
   quote: Quote | null;
   loading?: boolean;
 }
 
+/**
+ * QuoteCard component displays a quote and author, with loading skeleton.
+ * @param quote Quote object or null
+ * @param loading Whether to show loading skeleton
+ * @returns {JSX.Element}
+ */
 const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loading }) => (
   <Card
     sx={{
@@ -22,7 +30,11 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loading }) => (
     <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
       {loading ? (
         <>
-          <Skeleton variant="text" height={48} sx={{ mb: 2, fontSize: { xs: '1.25rem', sm: '2rem' } }} />
+          <Skeleton
+            variant="text"
+            height={48}
+            sx={{ mb: 2, fontSize: { xs: '1.25rem', sm: '2rem' } }}
+          />
           <Skeleton variant="text" width="40%" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
         </>
       ) : (
@@ -32,7 +44,7 @@ const QuoteCard: React.FC<QuoteCardProps> = ({ quote, loading }) => (
             gutterBottom
             sx={{ fontSize: { xs: '1.25rem', sm: '2rem' }, wordBreak: 'break-word', mb: 2 }}
           >
-            "{quote?.text}"
+            &quot;{quote?.text}&quot;
           </Typography>
           <Typography
             variant="body1"
