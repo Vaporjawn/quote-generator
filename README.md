@@ -1,7 +1,7 @@
 
 # Quote Generator
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/Vaporjawn/quote-generator/ci.yml?branch=main)](https://github.com/Vaporjawn/quote-generator/actions)
+[![CI](https://github.com/Vaporjawn/quote-generator/actions/workflows/ci.yml/badge.svg)](https://github.com/Vaporjawn/quote-generator/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Vaporjawn/quote-generator/pulls)
 
